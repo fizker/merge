@@ -1,0 +1,22 @@
+{ "name": "fmerge"
+, "version": "1.0.0"
+, "description": "A tool for merging objects."
+, "main": "index.js"
+, "devDependencies":
+  { "mocha": "~1.8.1"
+  , "chai": "~1.5.0"
+  }
+, "scripts":
+  { "test": "mocha"
+  }
+, "repository":
+  { "type": "git"
+  , "url": "git://github.com/fizker/merge.git"
+  }
+, "keywords":
+  [ "merge"
+  , "combine"
+  ]
+, "author": "Benjamin Horsleben"
+, "license": "WTFPL"
+}
