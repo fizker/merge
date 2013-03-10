@@ -10,9 +10,10 @@ function merge(a, b /*, ...args */) {
 	Object.keys(b || {}).forEach(function(key) {
 		var val = b[key]
 		// We only want to do this for actual objects
-		// Any falsy type is not an actual object (0, '', null, etc)
+		// Any falsy type is not an actual object (0, '', null, any array, etc)
 		if(val
 		&& typeof(val) == 'object'
+		&& !Array.isArray(val)
 		&& a[key]
 		&& typeof(a[key]) == 'object'
 		) {

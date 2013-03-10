@@ -24,4 +24,20 @@ describe('merge.js', function() {
 				.to.deep.equal({ a: 1, b: 2, c: 3 })
 		})
 	})
+	describe('When merging nested objects', function() {
+		it('should merge objects and simple values', function() {
+			var a = { a: { b: 1, c: 2 }, d: 3 }
+			  , b = { a: { b: 3, d: 4 }, d: 4, e: 5 }
+			  , c = { a: { b: 3, c: 2, d: 4 }, d: 4, e: 5 }
+			expect(merge(a, b))
+				.to.deep.equal(c)
+		})
+		it('should replace arrays', function() {
+			var a = { a: [ 1, 2 ] }
+			  , b = { a: [ 3 ] }
+			  , c = { a: [ 3 ] }
+			expect(merge(a, b))
+				.to.deep.equal(c)
+		})
+	})
 })

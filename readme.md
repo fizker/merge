@@ -1,8 +1,14 @@
 fmerge
 ======
 
-fmerge is a simple tool for merging objects. It takes any number of parameters.
-It even merges recursively. Arrays will just be replaced, though.
+fmerge is a simple tool for merging objects. It is perfect for handling options
+objects.
+
+It takes any number of parameters. It even merges recursively. Arrays will just
+be replaced, though.
+
+It does require a browser that supports ES5 methods though, so for IE8 or
+earlier, take a look at https://github.com/olivernn/augment.js.
 
 Example of use
 --------------
