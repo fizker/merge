@@ -10,6 +10,18 @@ be replaced, though.
 It does require a browser that supports ES5 methods though, so for IE8 or
 earlier, take a look at https://github.com/olivernn/augment.js.
 
+
+Installing
+----------
+
+Installing is easy. It automatically detects the environment among the three
+supported types ([node.js](http://nodejs.org), [require.js](http://requirejs.org)
+and normal browser version).
+
+- In `node`, simply use `npm install fmerge`.
+- The module is `require`-aware, so you can link it directly through require as well.
+- For normal browsers, it creates a global function `fmerge`.
+
 Example of use
 --------------
 
