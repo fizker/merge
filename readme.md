@@ -19,7 +19,10 @@ supported types ([node.js](http://nodejs.org), [require.js](http://requirejs.org
 and normal browser version).
 
 - In `node`, simply use `npm install fmerge`.
-- The module is `require`-aware, so you can link it directly through require as well.
+- The module is `require.js`-aware, so you can link it directly through `require.js`
+  as well.
+    - To make the `require.js` version, either install through `npm` or check out
+      from git and run `node install.js`.
 - For normal browsers, it creates a global function `fmerge`.
 
 Example of use
