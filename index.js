@@ -10,7 +10,7 @@ function merge(a, b /*, ...args */) {
 
 	var out = {}
 	Object.keys(a || {}).forEach(function(key) {
-		out[key] = a[key]
+		out[key] = copy(a[key])
 	})
 	Object.keys(b || {}).forEach(function(key) {
 		var val = b[key]
@@ -23,6 +23,8 @@ function merge(a, b /*, ...args */) {
 		&& typeof(a[key]) == 'object'
 		) {
 			val = merge(a[key], val)
+		} else {
+			val = copy(val)
 		}
 		out[key] = val
 	})
@@ -32,4 +34,12 @@ function merge(a, b /*, ...args */) {
 	}
 	return out
 }
+
+	function copy(val) {
+		if(Array.isArray(val)) return val.slice()
+		if(val && typeof(val) == 'object') {
+			return merge(val)
+		}
+		return val
+	}
 }(this))

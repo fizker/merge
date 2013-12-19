@@ -1,6 +1,41 @@
 describe('merge.js', function() {
 	var merge = require('../index')
 
+	describe('When given a single object', function() {
+		var original
+		var copy
+		beforeEach(function() {
+			original =
+				{ a:
+				  { aa:
+				    { aaa: [1,2,3]
+				    }
+				  , ab:
+				    { aba: 1
+				    }
+				  }
+				, b:
+				  { ba:
+				    { baa: 1
+				    }
+				  }
+				}
+			copy = merge(original)
+		})
+		it('should copy the first level', function() {
+			expect(copy).not.to.equal(original)
+		})
+		it('should copy the second level', function() {
+			expect(copy.a).not.to.equal(original.a)
+		})
+		it('should copy the third level', function() {
+			expect(copy.a.aa).not.to.equal(original.a.aa)
+		})
+		it('should also copy arrays', function() {
+			expect(copy.a.aa.aaa).not.to.equal(original.a.aa.aaa)
+		})
+	})
+
 	describe('When two objects are different', function() {
 		it('should return an object with all properties', function() {
 			expect(merge({ a: 1, b: 2 }, { c: 3, d: 4 }))
