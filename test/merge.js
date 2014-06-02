@@ -1,6 +1,16 @@
 describe('merge.js', function() {
 	var merge = require('../index')
 
+	describe('When given a single null argument', function() {
+		var result
+		beforeEach(function() {
+			result = merge(null)
+		})
+		it('should return a new object', function() {
+			expect(result).to.deep.equal({})
+		})
+	})
+
 	describe('When given a single object', function() {
 		var original
 		var copy
@@ -33,6 +43,14 @@ describe('merge.js', function() {
 		})
 		it('should also copy arrays', function() {
 			expect(copy.a.aa.aaa).not.to.equal(original.a.aa.aaa)
+		})
+	})
+
+	describe('When given null before a single object', function() {
+		it('should not throw', function() {
+			expect(function() {
+				merge(null, { a: { } })
+			}).to.not.throw()
 		})
 	})
 

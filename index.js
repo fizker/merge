@@ -19,7 +19,7 @@ function merge(a, b /*, ...args */) {
 		if(val
 		&& typeof(val) == 'object'
 		&& !Array.isArray(val)
-		&& a[key]
+		&& a && a[key]
 		&& typeof(a[key]) == 'object'
 		) {
 			val = merge(a[key], val)
