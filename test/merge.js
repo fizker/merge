@@ -18,7 +18,7 @@ describe('merge.js', function() {
 			original =
 				{ a:
 				  { aa:
-				    { aaa: [1,2,3]
+				    { aaa: [{},2,3]
 				    }
 				  , ab:
 				    { aba: 1
@@ -43,6 +43,9 @@ describe('merge.js', function() {
 		})
 		it('should also copy arrays', function() {
 			expect(copy.a.aa.aaa).not.to.equal(original.a.aa.aaa)
+		})
+		it('should deep-copy arrays', function() {
+			expect(copy.a.aa.aaa[0]).not.to.equal(original.a.aa.aaa[0])
 		})
 	})
 
@@ -89,12 +92,15 @@ describe('merge.js', function() {
 			expect(merge(a, b))
 				.to.deep.equal(c)
 		})
-		it('should replace arrays', function() {
+		it('should replace arrays with a copy', function() {
 			var a = { a: [ 1, 2 ] }
-			  , b = { a: [ 3 ] }
-			  , c = { a: [ 3 ] }
+			var b = { a: [ 3 ] }
+			var c = { a: [ 3 ] }
 			expect(merge(a, b))
 				.to.deep.equal(c)
+			expect(merge(a, b).a)
+				.to.not.equal(a.a)
+				.and.not.equal(b.a)
 		})
 	})
 })

@@ -36,7 +36,9 @@ function merge(a, b /*, ...args */) {
 }
 
 	function copy(val) {
-		if(Array.isArray(val)) return val.slice()
+		if(Array.isArray(val)) {
+			return val.map(copy)
+		}
 		if(val && typeof(val) == 'object') {
 			return merge(val)
 		}
