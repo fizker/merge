@@ -1,5 +1,9 @@
 describe('merge.js', function() {
 	var merge = require('../index')
+	let testData
+	beforeEach(() => {
+		testData = {}
+	})
 
 	describe('When given a single null argument', function() {
 		var result
@@ -101,6 +105,25 @@ describe('merge.js', function() {
 			expect(merge(a, b).a)
 				.to.not.equal(a.a)
 				.and.not.equal(b.a)
+		})
+	})
+
+	describe('merging circular objects', () => {
+		beforeEach(() => {
+			var a = { b: [ {} ] }
+			var b = { a }
+			a.b[0].circular = b
+			testData.object = a
+		})
+		it('should throw an error with a short stack', () => {
+			try {
+				merge(testData.object)
+			} catch(e) {
+				const lines = e.stack.split('\n').filter(x=>!x.includes('node_modules'))
+				expect(lines).to.have.length.lessThan(10)
+				return
+			}
+			throw new Error('should have thrown before now')
 		})
 	})
 })
