@@ -1,8 +1,36 @@
 ;(function(root) {
 if(typeof exports === 'object') {
-	module.exports = merge
+	module.exports = exported
 } else {
-	root.merge = merge
+	root.merge = exported
+}
+
+function exported(/* ...args */) {
+	var args = Array.prototype.slice.call(arguments)
+	assertNoCircular(args)
+	return merge.apply(this, args)
+}
+exported.skipCircularGuard = merge
+
+function assertNoCircular(args) {
+	var visitedObjects = []
+	var objectsToVisit = [ args ]
+
+	while(objectsToVisit.length > 0) {
+		var object = objectsToVisit.pop()
+
+		if(visitedObjects.indexOf(object) !== -1) {
+			throw new Error('fmerge cannot handle circular input')
+		}
+		visitedObjects.push(object)
+
+		Object.keys(object).forEach(function(key) {
+			var next = object[key]
+			if(!next) return
+			if(typeof(next) !== 'object') return
+			objectsToVisit.push(next)
+		})
+	}
 }
 
 function merge(a, b /*, ...args */) {
