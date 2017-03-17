@@ -1,17 +1,16 @@
 ;(function(root) {
 if(typeof exports === 'object') {
-	module.exports = function(/* ...args */) {
-		var args = Array.prototype.slice.call(arguments)
-		assertNoCircular(args)
-		return merge.apply(this, args)
-	}
+	module.exports = exported
 } else {
-	root.merge = function(/* ...args */) {
-		var args = Array.prototype.slice.call(arguments)
-		assertNoCircular(args)
-		return merge.apply(this, args)
-	}
+	root.merge = exported
 }
+
+function exported(/* ...args */) {
+	var args = Array.prototype.slice.call(arguments)
+	assertNoCircular(args)
+	return merge.apply(this, args)
+}
+exported.skipCircularGuard = merge
 
 function assertNoCircular(args) {
 	var visitedObjects = []

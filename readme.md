@@ -25,6 +25,7 @@ and normal browser version).
       from git and run `node install.js`.
 - For normal browsers, it creates a global function `fmerge`.
 
+
 Example of use
 --------------
 
@@ -35,3 +36,19 @@ Example of use
     , { a: 2, b: { a: 1, c: 2 }, c: [ 'another entry', { a: 1 } ] }
     ))
     // { a: 2, b: { a: 1, c: 2, d: 4 }, c: [ 'another entry', { a: 1 } ] }
+
+
+Circular ref detection
+----------------------
+
+The default function have built-in circular ref detection, but this comes at a
+performance cost. If you think that you don't need this, then you can skip it by
+calling `merge.skipCircularGuard()` instead of `merge()`.
+
+    var merge = require('fmerge')
+
+    // with circular detection
+    merge(first, second)
+
+    // without circular detection
+    merge.skipCircularGuard(first, second)
